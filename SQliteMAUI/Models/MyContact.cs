@@ -35,7 +35,7 @@ namespace SQliteMAUI.Models
         //esta propiedad no necesita ser guardada
         //por lo que se ignora de SQLite
         [Ignore]
-        public string Fullname => $"{FirstName} {LastName}";
+        public string Fullname => $"{Id} - {FirstName} {LastName}";
     }
 }
 

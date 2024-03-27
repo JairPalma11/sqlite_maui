@@ -11,6 +11,8 @@
 
     </ContentPage.ToolbarItems>
     <CollectionView
+        SelectionMode="Single"
+        SelectionChanged="OnContactSelected"
         x:Name="collectionView">
 
         <CollectionView.ItemTemplate>

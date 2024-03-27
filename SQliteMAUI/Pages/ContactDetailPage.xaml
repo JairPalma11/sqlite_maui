@@ -19,6 +19,7 @@
             x:Name="Email"
             Placeholder="Correo electronico" />
         <Entry
+            MaxLength="11"
             Keyboard="Telephone"
             x:Name="Phone"
             Placeholder="Telefono"/>

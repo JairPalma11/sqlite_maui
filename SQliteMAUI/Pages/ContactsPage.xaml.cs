@@ -23,4 +23,12 @@ public partial class ContactsPage : ContentPage
     {
         await Navigation.PushAsync(new ContactDetailPage());
     }
+
+    async void OnContactSelected(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
+    {
+        var contact = e.CurrentSelection.FirstOrDefault() as MyContact;
+        var contactDetailPage = new ContactDetailPage();
+        contactDetailPage.SetContact(contact);
+        await Navigation.PushAsync(contactDetailPage);
+    }
 }
