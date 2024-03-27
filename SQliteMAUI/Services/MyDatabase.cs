@@ -4,14 +4,15 @@ using SQliteMAUI.Models;
 
 namespace SQliteMAUI.Services
 {
-	public sealed class MyDatabase
-	{
+    public sealed class MyDatabase
+    {
         /// <summary>
         /// nombre de la base de datos
         /// y su extension debe ser .db3
         /// </summary>
         private const string DbName = "contacts.db3";
-        private static object lockObject = new object();
+        public SQLiteConnection? Database { get; private set; }
+        private static object lockObj = new object();
 
         private MyDatabase()
 		{
@@ -19,35 +20,47 @@ namespace SQliteMAUI.Services
 
         private static MyDatabase? _instance = null;
 
-
-        public static MyDatabase GetInstance()
+        public static MyDatabase Instance
         {
-            //usamos lock para volver
-            //nuestro singleton thread-safe
-            lock (lockObject)
+            get
             {
-                if (_instance == null)
+                //usamos lock para volver
+                //nuestro singleton thread-safe
+                lock (lockObj)
                 {
-                    _instance = new MyDatabase();
-                }
+                    if (_instance == null)
+                    {
+                        _instance = new MyDatabase();
+                        _instance.Initialize();
+                    }
 
-                return _instance;
+                    return _instance;
+                }
             }
         }
 
-        public async Task Initialize()
+        public void Initialize()
         {
-            var path = Path.Combine(FileSystem.AppDataDirectory, DbName);
-
-            var database = new SQLiteAsyncConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite);
-
-            //tenemos que agregar las tablas que
-            //que vayamos a utilizar
-            var tables = new List<Type>
+            //creamos la base de datos solo una vez
+            //verificamos que este nula
+            if (Database == null)
             {
-                typeof(MyContact)
-            };
-            await database.CreateTablesAsync(CreateFlags.None, tables.ToArray());
+                var path = Path.Combine(FileSystem.AppDataDirectory, DbName);
+
+                //creamos la base de datos
+                //No asincrona
+                Database = new SQLiteConnection(path, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite);
+
+                //tenemos que agregar las tablas que
+                //que vayamos a utilizar
+                var tables = new List<Type>
+                {
+                    typeof(MyContact)
+                };
+
+                //creamos las tablas sino existen
+                Database.CreateTables(CreateFlags.None, tables.ToArray());
+            }
         } 
     }
 }
