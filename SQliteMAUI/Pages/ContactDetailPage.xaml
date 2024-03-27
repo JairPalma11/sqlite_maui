@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SQliteMAUI.Pages.ContactDetailPage"
              Padding="20"
-             Title="Detall de contacto">
+             Title="Detalle de contacto">
     <VerticalStackLayout
         Spacing="10">
         <Entry

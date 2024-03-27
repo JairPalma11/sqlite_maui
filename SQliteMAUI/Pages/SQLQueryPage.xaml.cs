@@ -2,7 +2,12 @@
 using SQliteMAUI.Services;
 
 namespace SQliteMAUI.Pages;
-
+/// <summary>
+/// Ejemplos de consultas
+/// SELECT * FROM Contact
+/// SELECT FirstName, Email FROM Contact
+/// SELECT FirstName, Email FROM Contact WHERE Id = 1
+/// </summary>
 public partial class SQLQueryPage : ContentPage
 {
 	public SQLQueryPage()

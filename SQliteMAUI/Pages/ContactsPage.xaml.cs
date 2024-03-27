@@ -55,8 +55,8 @@ public partial class ContactsPage : ContentPage
     /// <param name="e"></param>
     void OnDeleted(System.Object sender, System.EventArgs e)
     {
-        var swipeView = sender as SwipeItem;
-        var contact = swipeView?.CommandParameter as MyContact;
+        var swipeItem = sender as SwipeItem;
+        var contact = swipeItem?.CommandParameter as MyContact;
         MyDatabase.Instance.Database.Delete(contact);
 
         //refrescamos la lista
@@ -70,12 +70,12 @@ public partial class ContactsPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    async void OnSelectContact(System.Object sender, System.EventArgs e)
+    void OnSelectContact(System.Object sender, System.EventArgs e)
     {
-        var swipeView = sender as SwipeItem;
-        var contact = swipeView?.CommandParameter as MyContact;
+        var swipeItem = sender as SwipeItem;
+        var contact = swipeItem?.CommandParameter as MyContact;
         var contactDetailPage = new ContactDetailPage();
         contactDetailPage.SetContact(contact);
-        await Navigation.PushAsync(contactDetailPage);
+        Navigation.PushAsync(contactDetailPage);
     }
 }
