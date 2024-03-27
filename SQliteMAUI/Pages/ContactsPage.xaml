@@ -7,7 +7,11 @@
 
         <ToolbarItem
             Clicked="OnAddContact"
-            Text="Agregar" />
+            Text="Nuevo" />
+
+        <ToolbarItem
+            Clicked="OnTest"
+            Text="Test" />
 
     </ContentPage.ToolbarItems>
     <CollectionView

@@ -22,8 +22,6 @@ namespace SQliteMAUI.Services
                     LastName = "Doe",
                     Email = $"email{i}@domain.com",
                     PhoneNumber = CreateRandomPhone(),
-                    IsFavorite = i % 2 == 0,
-                    DateCreated = DateTime.Now.AddDays(-i)
                 });
             }
 

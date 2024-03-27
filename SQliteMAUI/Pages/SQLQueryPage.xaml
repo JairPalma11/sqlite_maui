@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SQliteMAUI.Pages.SQLQueryPage"
+             Padding="20"
+             Title="SQLQueryPage">
+    <Grid
+        RowSpacing="10"
+        RowDefinitions="Auto, *"
+        ColumnDefinitions="*">
+
+        <VerticalStackLayout
+            Spacing="10"
+            Grid.Row="0"
+            Grid.Column="0">
+
+            <Entry
+                x:Name="entry"
+                Placeholder="Escribe tu consulta en SQL"/>
+
+            <Button
+                Clicked="OnExecuted"
+                Text="Ejecutar" />
+
+            <Label
+                x:Name="result"
+                Text="Sin resultados" />
+        </VerticalStackLayout>
+
+        <CollectionView
+            x:Name="collectionView"
+            Grid.Row="1"
+            Grid.Column="0">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ContentView>
+
+                        <VerticalStackLayout
+                            Margin="10">
+                            <Label
+                                FontSize="Medium"
+                                Text="{Binding Fullname}" />
+                            <Label
+                                FontSize="Small"
+                                Text="{Binding PhoneNumber}" />
+                            <Label
+                                FontSize="Small"
+                                Text="{Binding Email}" />
+                        </VerticalStackLayout>
+
+                    </ContentView>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

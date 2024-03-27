@@ -29,9 +29,6 @@ namespace SQliteMAUI.Models
         //igual lanzara una excepcion
         [Unique]
         public string? Email { get; set; }
-        public bool IsFavorite { get; set; }
-        public DateTime DateCreated { get; set; } = DateTime.Now;
-
         //esta propiedad no necesita ser guardada
         //por lo que se ignora de SQLite
         [Ignore]
