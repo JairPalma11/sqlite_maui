@@ -11,8 +11,7 @@
 
     </ContentPage.ToolbarItems>
     <CollectionView
-        SelectionMode="Single"
-        SelectionChanged="OnContactSelected"
+        SelectionMode="None"
         x:Name="collectionView">
 
         <CollectionView.ItemTemplate>
@@ -21,28 +20,48 @@
 
                 <ContentView>
 
-                    <HorizontalStackLayout
-                        Spacing="12"
-                        Margin="10">
+                    <SwipeView>
 
-                        <Image
-                            VerticalOptions="CenterAndExpand"
-                            HeightRequest="80"
-                            Source="person_icon" />
+                        <SwipeView.RightItems>
 
-                        <VerticalStackLayout
-                            VerticalOptions="CenterAndExpand"
+                            <SwipeItem
+                                Clicked="OnDeleted"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="Red"
+                                Text="Eliminar" />
 
-                            Spacing="8">
-                            <Label
-                                FontSize="Medium"
-                                Text="{Binding Fullname}" />
-                            <Label
-                                FontSize="Small"
-                                Text="{Binding PhoneNumber}" />
-                        </VerticalStackLayout>
+                            <SwipeItem
+                                Clicked="OnSelectContact"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="{StaticResource Primary}"
+                                Text="Actualizar" />
 
-                    </HorizontalStackLayout>
+                        </SwipeView.RightItems>
+
+                        <HorizontalStackLayout
+                            Spacing="12"
+                            Margin="10">
+
+                            <Image
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="80"
+                                Source="person_icon" />
+
+                            <VerticalStackLayout
+                                VerticalOptions="CenterAndExpand"
+
+                                Spacing="8">
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding Fullname}" />
+                                <Label
+                                    FontSize="Small"
+                                    Text="{Binding PhoneNumber}" />
+                            </VerticalStackLayout>
+
+                        </HorizontalStackLayout>
+
+                    </SwipeView>
 
                 </ContentView>
 

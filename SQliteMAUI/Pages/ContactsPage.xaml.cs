@@ -24,9 +24,21 @@ public partial class ContactsPage : ContentPage
         await Navigation.PushAsync(new ContactDetailPage());
     }
 
-    async void OnContactSelected(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
+    void OnDeleted(System.Object sender, System.EventArgs e)
     {
-        var contact = e.CurrentSelection.FirstOrDefault() as MyContact;
+        var swipeView = sender as SwipeItem;
+        var contact = swipeView?.CommandParameter as MyContact;
+        MyDatabase.Instance.Database.Delete(contact);
+
+        //refrescamos la lista
+        var contacts = MyDatabase.Instance.Database!.Table<MyContact>().ToList();
+        collectionView.ItemsSource = contacts;
+    }
+
+    async void OnSelectContact(System.Object sender, System.EventArgs e)
+    {
+        var swipeView = sender as SwipeItem;
+        var contact = swipeView?.CommandParameter as MyContact;
         var contactDetailPage = new ContactDetailPage();
         contactDetailPage.SetContact(contact);
         await Navigation.PushAsync(contactDetailPage);
